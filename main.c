@@ -13,7 +13,7 @@ printf("enter a key: ");
 scanf("%d\n", &key);
 
 encrypt=(char + key)*(mod 26);
-
+printf("%d\n", &encrypt);
 
 
 return 0;
