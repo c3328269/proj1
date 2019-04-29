@@ -1,36 +1,50 @@
 #include <stdio.h>
 
-void caesar (char cipher[], int shift);
-
 int main() {
     
-    char message[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-    char 
-    int key;
+    char message[100], ch;
+    int i, key, cipher;
+    char rotation, substitution, selection;
     
+    rotation = 1;
+    substitution = 2;
     
-printf("Enter a message to encrypt: ");
-scanf("%d\n", char);
-
-printf("enter a key: ");
-scanf("%d\n", &key);
-
-
-
-
-return 0;
-}
-
-void caesar (char cipher[], int shift) {
-    int = 0;
+    printf("Encryption\n For Rotation cipher enter 1 \n For substitution cipher enter 2\n");
+    printf("Select cipher: ");
+    scanf("%d", &cipher);
     
-    while (cipher[i] != '\0'){
-        if((cipher[i] + shift) >= 65 && (cipher[i] + shift) <=90) {
-            cipher[i] += (shift);
-        } else {
-            cipher[i] += (shift - ('Z' - 'A'));
-        }
-        i++;
+    switch(cipher){
+        
+        case 1:
+    
+    printf("Enter a message to encrypt: ");
+    scanf("%s", message);
+
+    printf("enter a key: ");
+    scanf("%d", &key);
+
+    for(i=0; message[i] !='\0'; i++){
+        ch=message[i];
+        
+        if(ch >= 'a' && ch <= 'z'){
+			ch = ch + key;
+		    
+			if(ch > 'z'){
+				ch = ch - 'z' + 'a' - 1;
+			}
+			message[i] = ch;
+		}
     }
-    printf("%s", cipher);
+    
+    printf("Encrypted message: %s", message);
+    
+break;
+
+case 2:
+
+
+
+break;
+}
+return 0;
 }
