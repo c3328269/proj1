@@ -1,50 +1,82 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdbool.h>
 
 int main() {
     
-    char message[100], ch;
-    int i, key, cipher;
+    char oldAlphabet[26];
+    char message[1000], ch;
+    char newAlphabet;
+    int i, key, cipher, temp, j, k;
     char rotation, substitution, selection;
-   
+    
     
     printf("Encryption\n For Rotation cipher enter 1 \n For substitution cipher enter 2\n");
-    printf("To decrypt the rotation cipher enter 3\n To decrypt the substitution cipher enter 4\n");
+    printf("Decryption\n To decrypt the rotation cipher enter 3\n To decrypt the substitution cipher enter 4\n");
     printf("Select cipher: ");
-    scanf("%d", &cipher); //menu setup to select cipher and wether to encrypt or decrypt
+    scanf("%d", &cipher);
     
     switch(cipher){
         
         case 1:
-    //Rotation cipher encryption
+    
     printf("Enter a message to encrypt: ");
     scanf("%s", message);
 
-    printf("enter a key: ");            //menu for encryption to gain key and message to encrypt
+    printf("enter a key: ");
     scanf("%d", &key);
+    
 
-    for(i=0; message[i] !='\0'; i++){   //in this instance 'i' will increase for each case and expires once the letter count is reached
-        ch=message[i];                  //message[i] means the index
+    for(i=0; message[i] !='\0'; i++){
+        ch=message[i];
         
-        if(ch >= 'a' && ch <= 'z'){     //if the characters are inbetween 'a' and 'z'
+        if(ch >= 'a' && ch <= 'z'){
 			ch = ch + key;
 		    
-			if(ch > 'z'){               //if the characters exceed 'a' and 'z' once the key has been used returns to the end of the alphabet
+			if(ch > 'z'){
 				ch = ch - 'z' + 'a' - 1;
 			}
-			message[i] = ch;            //capitals also work for each case but upper case remain upper case and lower case remain lower case
+			message[i] = ch;
 		}
     }
     
-    printf("Encrypted message: %s", message);
+    printf("\n Encrypted message: %s", message);
     
 break;
 
-    case 2:
-
+        case 2:
+    
+    printf("Enter a key: ");
+    scanf("%d", &key);
+    
+    printf("Enter a message to encrypt: ");
+    scanf("%s", message);
+    
+    for(i=0; message[i] !='\0'; i++){
+         ch=message[i];
+        
+        newAlphabet=key%26;
+        
+        if(ch >= 'a' && ch <= 'z'){
+			ch = ch + newAlphabet;
+		    
+			if(ch > 'z'){
+				ch = ch - 'z' + 'a' - 1;
+			}
+			message[i] = ch + newAlphabet;
+			
+		}
+        
+    }
+    
+    printf("\n Encrypted message: %s", message);
+    
 break;
 
         case 3:
-    //Rotation cipher decryption
+        
     printf("Enter message to decrypt: ");
     scanf("%s", message);
     
@@ -57,7 +89,7 @@ break;
         if(ch >= 'a' && ch <= 'z'){
 			ch = ch - key;
 		    
-			if(ch < 'a'){             //replaced 'z' with 'a' as the key is taken away
+			if(ch < 'a'){
 				ch = ch + 'z' - 'a' + 1;
 			}
 			message[i] = ch;
@@ -65,13 +97,36 @@ break;
     }
     
     printf("Decrypted message: %s", message);
-    //just reversed the process of encryption, inversed most math symbols
+
 break;
 
-    case 4:
-
+        case 4:
+    printf("Enter a key: ");
+    scanf("%d", &key);
+    
+    printf("Enter a message to decrypt: ");
+    scanf("%s", message);
+    
+    for(i=0; message[i] !='\0'; i++){
+         ch=message[i];
+        
+        newAlphabet=key/26;
+        
+        if(ch >= 'a' && ch <= 'z'){
+			ch = ch + newAlphabet;
+		    
+			if(ch < 'a'){
+				ch = ch + 'z' - 'a' + 1;
+			}
+			message[i] = ch - newAlphabet;
+			
+		}
+        
+    }
+    
+    printf("\n Decrypted message: %s", message);
+    
 break;
 }
-
 return 0;
 }
